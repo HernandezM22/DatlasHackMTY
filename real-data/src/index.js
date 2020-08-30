@@ -3,7 +3,7 @@ import {HexagonLayer} from '@deck.gl/aggregation-layers';
 import {ScatterplotLayer} from '@deck.gl/layers';
 import {HeatmapLayer} from '@deck.gl/aggregation-layers';
 
-const dataD = './realData.json'
+const dataD = './original.json'
 
 window.initMap = () => {
     const map = new google.maps.Map(document.getElementById('map'), {
@@ -300,20 +300,6 @@ const scatterplot = () => new ScatterplotLayer({
     getPosition: d => [d.LONG, d.LAT],
     getFillColor: d => d.MAGNITUD_DANO > 1 ? [200, 0, 40, 150] : [255, 140, 0, 100],
 
-    pickable: true,
-    onHover: ({object, x, y}) => {
-        const el = document.getElementById('tooltip');
-        if (object) {
-            const { PERIODO_DIA, TIPO_VEHICULO } = object;
-            el.innerHTML = `<h1> Tipo Vehículo: ${TIPO_VEHICULO} Periodo día: ${PERIODO_DIA}</h1>`
-            el.style.display = 'block';
-            el.style.opacity = 0.9;
-            el.style.left = x + 'px';
-            el.style.top = y + 'px';
-        } else {
-            el.style.opacity = 0.0;
-        }
-    },
 });
 
 const heatmap = () => new HeatmapLayer({

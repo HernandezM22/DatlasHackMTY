@@ -289,7 +289,6 @@ window.initMap = () => {
     // overlay.setProps(); for updates on the map
 }
 
-
 const scatterplot = () => new ScatterplotLayer({
     id: 'scatter',
     data: dataD,
@@ -298,22 +297,7 @@ const scatterplot = () => new ScatterplotLayer({
     radiusMinPixels: 2,
     radiusMaxPixels: 5,
     getPosition: d => [d.LON, d.LAT],
-    getFillColor: d => d.MAGNITUD_DANO > 1 ? [200, 0, 40, 150] : [255, 140, 0, 100],
-
-    pickable: true,
-    onHover: ({object, x, y}) => {
-        const el = document.getElementById('tooltip');
-        if (object) {
-            const { PERIODO_DIA, TIPO_VEHICULO } = object;
-            el.innerHTML = `<h1> Tipo Vehículo: ${TIPO_VEHICULO} Periodo día: ${PERIODO_DIA}</h1>`
-            el.style.display = 'block';
-            el.style.opacity = 0.9;
-            el.style.left = x + 'px';
-            el.style.top = y + 'px';
-        } else {
-            el.style.opacity = 0.0;
-        }
-    },
+    getFillColor: d => [200, 0, 40, 150],
 });
 
 const heatmap = () => new HeatmapLayer({
